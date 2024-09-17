@@ -50,7 +50,7 @@ const userRegister = async (
 
     await newUser.save();
     return res.status(201).json({
-      message: "Hurry! now you are successfully registred. Please nor login.",
+      message: "Hurry! now you are successfully registred. Please login.",
       success: true,
     });
   } catch (err) {
@@ -164,7 +164,7 @@ const checkRole = (roles: string | any[]) =>
       };
     },
     next: () => any
-  ) => !roles.includes(req.user.role) ? res.status(401).json("Unauthorized") : next();
+  ) => !roles.includes(req.user.role) ? res.status(401).json("Unauthorized access") : next();
 
 const validateEmail = async (email: any) => {
   let user = await User.findOne({ email });

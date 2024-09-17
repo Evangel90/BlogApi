@@ -73,7 +73,7 @@ router.get(
 router.get(
   "/admin",
   userAuth,
-  checkRole(["superadmin"]),
+  checkRole(["admin"]),
   async (req: any, res: { json: (arg0: string) => any; }) => {
     return res.json("Hello Admin");
   }
@@ -85,7 +85,7 @@ router.get(
   userAuth,
   checkRole(["editor", "admin"]),
   async (req: any, res: { json: (arg0: string) => any; }) => {
-    return res.json("Only editor and Admin can access this route, Welcome!");
+    return res.json("Only editors and Admins can access this route, Welcome!");
   }
 );
 
