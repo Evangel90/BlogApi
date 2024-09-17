@@ -4,7 +4,7 @@ interface IArticle {
   title: string;
   content: string;
   author: string;
-  publishedDate: Date;
+  publishedDate?: Date;
 }
 
 const articleSchema = new Schema<IArticle>({

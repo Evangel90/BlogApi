@@ -1,11 +1,13 @@
 import { Router } from 'express';
 import Article from '../models/article.model';
+const { userAuth, checkRole } = require("../utils/auth");
+// import { userAuth } from '../utils/auth';
 
 
 const router = Router();
 
 // Create an article
-router.post('/', async (req, res) => {
+router.post('/', userAuth, async (req, res) => {
   try {
     const newArticle = new Article(req.body);
     const savedArticle = await newArticle.save();
@@ -52,7 +54,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // Delete an article by ID
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', userAuth, checkRole(["editor", "admin"]), async (req, res) => {
   try {
     const deletedArticle = await Article.findByIdAndDelete(req.params.id);
     if (!deletedArticle) {
