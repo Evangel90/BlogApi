@@ -150,6 +150,13 @@ const validateUsername = async (username: any) => {
  */
 const userAuth = passport.authenticate("jwt", { session: false });
 
+const googleAuth = passport.authenticate('google', { scope:[ 'email', 'profile' ] });
+
+// const googleAuthCallback = passport.authenticate( 'google', {
+//   successRedirect: '/auth/google/profile',
+//   failureRedirect: '/auth/google/failure'
+// });
+
 /**
  * @DESC Check Role Middleware
  */
@@ -195,4 +202,6 @@ module.exports = {
   userLogin,
   userRegister,
   serializeUser,
+  googleAuth,
+  // googleAuthCallback
 };

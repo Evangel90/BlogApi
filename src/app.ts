@@ -19,8 +19,8 @@ app.get("/ping", (req, res) => {
 });
 
 // Routes
-app.use("/api/articles", articlesRoute);
 app.use("/api/users", usersRoute);
+app.use("/api/articles", articlesRoute);
 
 // Connect to MongoDB
 connectToMongoDB()

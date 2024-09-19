@@ -5,7 +5,9 @@ const {
   userLogin,
   checkRole,
   userRegister,
-  serializeUser
+  serializeUser,
+  googleAuth,
+  // googleAuthCallback
 } = require("../utils/auth");
 
 // Users Registeration Route
@@ -41,9 +43,11 @@ router.post("/login-admin", async (req: { body: any; }, res: any) => {
 // Profile Route
 router.get(
     "/profile", 
-    userAuth, 
-    async (req: { user: any; }, res: { json: (arg0: any) => any; }) => {
-        return res.json(serializeUser(req.user));
+    // userAuth, 
+    // googleAuthCallback,
+    async (req: { user: any; }, res: any) => {
+        // return res.json(await serializeUser(req.user));
+        return res.send("You are authenticated");
     }
 );
 
@@ -88,6 +92,15 @@ router.get(
     return res.json("Only editors and Admins can access this route, Welcome!");
   }
 );
+
+
+//Google Authentication
+
+router.get('/', (req: any, res: any) => {
+  res.send("<button><a href='/api/users/auth'>Login With Google</a></button>");
+})
+
+router.get('/auth', googleAuth);
 
 
 export default router;
