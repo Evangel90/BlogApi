@@ -1,6 +1,9 @@
 import User from "../models/user.model";
 const { Strategy, ExtractJwt } = require("passport-jwt");
 const GoogleStrategy = require("passport-google-oauth2").Strategy;
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -35,9 +38,8 @@ module.exports = (passport: { use: (arg0: any) => void }) => {
   passport.use(
     new GoogleStrategy(
       {
-        clientID:
-          "751799631781-a8t6eolajqd2j9su7hmemn72h9o2mess.apps.googleusercontent.com",
-        clientSecret: "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",
+        clientID: process.env.CLIENT_ID,
+        clientSecret: process.env.CLIENT_SECRET,
         callbackURL: "http://localhost:8000/api/users/profile",
         passReqToCallback: true,
       },
